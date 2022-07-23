@@ -1,10 +1,9 @@
 const _ = require('lodash')
 const db = require('../db')
+const {NUM_USERS} = require('../constants')
 
 const firstName = ['jack', 'anne', 'loki', 'thor', 'brian', 'julia', 'ivan', 'tony', 'stipe', 'michael', 'mila', 'marija', 'aragorn']
 const lastName = ['mcdougal', 'sprout', 'snape', 'dragon', 'john', 'right', 'davis', 'brown', 'smith']
-
-const NUM_USERS = 10000
 
 const NUM_FIRST_NAMES_FOR_LOOP = firstName.length - 1
 const NUM_LAST_NAMES_FOR_LOOP = lastName.length - 1
@@ -23,7 +22,7 @@ for (let i = 0; i < NUM_USERS; i++) {
 
 async function createRandomUsers () {
   const dbClient = await db.getClient()
-  await dbClient.query('TRUNCATE ONLY users RESTART IDENTITY')
+  await dbClient.query('TRUNCATE users RESTART IDENTITY CASCADE')
   await dbClient.query(`
     INSERT INTO users (email) VALUES ${generatedStrValues.join(',')}
   `, usersToCreate)

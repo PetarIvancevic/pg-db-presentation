@@ -4,7 +4,6 @@ exports.up = pgm =>
     id: 'id',
     email: {
       type: 'varchar',
-      unique: true,
       notNull: true,
     }
   })
