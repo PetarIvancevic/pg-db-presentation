@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "migrate": "node-pg-migrate",
+    "seed:users": "node -r ./env.js ./seedScripts/seedUsers.js",
     "simulate": "node -r ./env.js ./simulations.js"
   },
   "repository": {

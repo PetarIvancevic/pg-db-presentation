@@ -10,7 +10,7 @@ async function run () {
 }
 
 run()
-.then(async () => {
-  await db.dbClose()
-})
 .catch(console.error)
+.finally(async () => {
+  await db.close()
+})

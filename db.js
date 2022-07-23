@@ -19,7 +19,7 @@ async function getClient () {
   return dbClient
 }
 
-async function dbClose () {
+async function close () {
   if (dbClient) {
     await dbClient.end()
   }
@@ -29,5 +29,5 @@ module.exports = {
   connectionString,
   dbClient,
   getClient,
-  dbClose,
+  close,
 }
