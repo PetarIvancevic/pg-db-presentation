@@ -1,0 +1,27 @@
+{
+  "name": "pg-db-presentation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "node-pg-migrate",
+    "simulate": "node -r ./env.js ./simulations.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PetarIvancevic/pg-db-presentation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PetarIvancevic/pg-db-presentation/issues"
+  },
+  "homepage": "https://github.com/PetarIvancevic/pg-db-presentation#readme",
+  "dependencies": {
+    "dotenv-safe": "^8.2.0",
+    "lodash": "^4.17.21",
+    "node-pg-migrate": "^6.2.2",
+    "pg": "^8.7.3"
+  }
+}
