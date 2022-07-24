@@ -27,3 +27,8 @@ WHERE query = 'SELECT * FROM user_books WHERE book_title = $1';
 SELECT query, calls, max_exec_time, min_exec_time, mean_exec_time, mean_plan_time, plans
 FROM pg_stat_statements
 WHERE query ILIKE '%FROM user_books%';
+
+-- get all user statements
+SELECT query, calls, max_exec_time, min_exec_time, mean_exec_time, mean_plan_time, plans
+FROM pg_stat_statements
+WHERE query ILIKE '%FROM user%';
