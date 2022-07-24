@@ -27,9 +27,9 @@ function generateReplacementValues (arrLength) {
 function generateBooks () {
   const userBooksToCreate = []
   const bookEveryoneRead = books[0]
-  const randomBook = books[_.random(0, NUM_BOOKS)]
 
   for (let i = 0; i < NUM_USERS; i++) {
+    const randomBook = books[_.random(1, NUM_BOOKS)]
     userBooksToCreate.push([
       i + 1, // user_id
       bookEveryoneRead.title,
@@ -46,29 +46,6 @@ function generateBooks () {
     ])
   }
 
-  return _.shuffle(userBooksToCreate)
-}
-
-function generateMoreRandomBooks () {
-  const userBooksToCreate = []
-  const randomBook = books[_.random(0, NUM_BOOKS)]
-
-  for (let i = 0; i < NUM_USERS; i++) {
-    userBooksToCreate.push([
-      i + 1, // user_id
-      bookEveryoneRead.title,
-      bookEveryoneRead.authors.join(','),
-      bookEveryoneRead.pageCount,
-      _.random(1, 5) // review
-    ])
-    userBooksToCreate.push([
-      i + 1, // user_id
-      randomBook.title,
-      randomBook.authors.join(','),
-      randomBook.pageCount,
-      _.random(1, 5) // review
-    ])
-  }
   return _.shuffle(userBooksToCreate)
 }
 

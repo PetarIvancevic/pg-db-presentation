@@ -26,8 +26,10 @@ async function runEmailExample () {
    * Simulate simple selects with LIKE property
    */
   const simpleSelectQuery = `SELECT * FROM users WHERE email LIKE $1`
-  const simpleQueryParam = 'AM'
-  await dbSimulator(simpleSelectQuery, [`${simpleQueryParam}%`])
+  // example with % at the beginning
+  // const simpleQueryParam = '%AM%'
+  const simpleQueryParam = 'AM%'
+  await dbSimulator(simpleSelectQuery, [`${simpleQueryParam}`])
 }
 
 /**
@@ -38,16 +40,61 @@ async function runEmailExample () {
   const dbSimulator = getSimulationExecutor(dbClient)
 
   /**
-   * Simulate simple selects with LIKE property
+   * Simulate simple selects with =
    */
   const simpleSelectQuery = `SELECT * FROM user_books WHERE book_title = $1`
   const simpleQueryParam = 'Unlocking Android'
   await dbSimulator(simpleSelectQuery, [`${simpleQueryParam}%`])
 }
 
+/**
+ * Run book title db simulations
+ */
+ async function runBookTitleExamplesNormalized () {
+  const dbClient = await db.getClient()
+  const dbSimulator = getSimulationExecutor(dbClient)
+
+  /**
+   * Simulate simple selects with subquery
+   */
+  const simpleSelectQuery = `
+    SELECT *
+    FROM user_books
+    WHERE book_id = (
+      SELECT id
+      FROM books
+      WHERE title = $1
+    )
+  `
+  const simpleQueryParam = 'Unlocking Android'
+  await dbSimulator(simpleSelectQuery, [`${simpleQueryParam}%`])
+}
+
+/**
+ * Run book title db simulations
+ */
+ async function runBookTitleExamplesJoin () {
+  const dbClient = await db.getClient()
+  const dbSimulator = getSimulationExecutor(dbClient)
+
+  /**
+   * Simulate simple selects with JOIN property
+   */
+  const simpleSelectQuery = `
+    SELECT *
+    FROM user_books
+      LEFT JOIN books ON books.id = user_books.book_id
+    WHERE title = $1
+  `
+  const simpleQueryParam = 'Unlocking Android'
+  await dbSimulator(simpleSelectQuery, [`${simpleQueryParam}%`])
+}
+
 const fnsToRun = {
   email: runEmailExample,
-  'book-title': runBookTitleExamples
+  'book-title': runBookTitleExamples,
+  'book-title-normalized': runBookTitleExamplesNormalized,
+  'book-title-join': runBookTitleExamplesJoin
 }
 
 if (fnsToRun[sentArgs.simulation]) {

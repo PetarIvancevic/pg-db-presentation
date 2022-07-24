@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "migrate": "node-pg-migrate",
+    "migrate:data": "node -r ./env.js ./migrateData.js",
     "seed:users": "node -r ./env.js ./seedScripts/seedUsers.js",
     "seed:books": "node -r ./env.js ./seedScripts/seedBooks.js",
     "seed": "run-s seed:users seed:books",
     "simulate:email": "node -r ./env.js ./simulations.js -s email",
-    "simulate:book-title": "node -r ./env.js ./simulations.js -s book-title"
+    "simulate:book-title": "node -r ./env.js ./simulations.js -s book-title",
+    "simulate:book-title-normalized": "node -r ./env.js ./simulations.js -s book-title-normalized",
+    "simulate:book-title-join": "node -r ./env.js ./simulations.js -s book-title-join"
   },
   "repository": {
     "type": "git",
